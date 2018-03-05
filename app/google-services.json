@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "988276985803",
+    "firebase_url": "https://babiesnew-88f74.firebaseio.com",
+    "project_id": "babiesnew-88f74",
+    "storage_bucket": "babiesnew-88f74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988276985803:android:aa4c6703b71bac09",
+        "android_client_info": {
+          "package_name": "com.inspira.babies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988276985803-d1qn94ucgttqf5u3kqk1gfspp57sg6d3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inspira.babies",
+            "certificate_hash": "18664480acb958b9cb16274d28a3d46dc3fc99e0"
+          }
+        },
+        {
+          "client_id": "988276985803-mm0mmreihgqate1335e4mumak82jcud8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inspira.babies",
+            "certificate_hash": "1223532cef4bebe01f7df7a277e60ab46384346e"
+          }
+        },
+        {
+          "client_id": "988276985803-nq0ief7trs3np2pf93m92ar2bk3npft2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9gd2wVBjBLPTWN-eLiXMmotxNIrZmbgY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988276985803-nq0ief7trs3np2pf93m92ar2bk3npft2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
