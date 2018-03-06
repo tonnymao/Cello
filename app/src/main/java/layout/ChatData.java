@@ -1,15 +1,7 @@
 package layout;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
-import com.inspira.babies.GlobalVar;
-import com.inspira.babies.LibInspira;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.inspira.babies.IndexInternal.global;
 
 /**
  * Created by Arta on 10-Dec-17.
@@ -228,7 +220,7 @@ public class ChatData {
         public void setListMember(String JsonDataMember,String splitBy) {
             //split by
             listMember.clear();
-            String[] pieces = JsonDataMember.trim().split("\\"+splitBy);
+            String[] pieces = JsonDataMember.trim().split("\\" + splitBy);
             if(pieces.length != 0) {
                 for (String data : pieces) {
                     // loop

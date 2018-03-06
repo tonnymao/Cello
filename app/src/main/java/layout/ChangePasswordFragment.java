@@ -19,8 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,8 +29,8 @@ import org.json.JSONObject;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import static com.inspira.babies.IndexInternal.global;
-import static com.inspira.babies.IndexInternal.jsonObject;
+import static com.inspira.cello.IndexInternal.global;
+import static com.inspira.cello.IndexInternal.jsonObject;
 
 public class ChangePasswordFragment extends Fragment implements View.OnClickListener{
     private EditText edtOldPassword, edtNewPassword, edtConfirmation;

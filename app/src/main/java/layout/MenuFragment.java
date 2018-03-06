@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
 /**
  * A simple {@link Fragment} subclass.

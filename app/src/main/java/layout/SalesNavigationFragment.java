@@ -36,9 +36,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.inspira.babies.GlobalVar;
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.GlobalVar;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +52,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import static com.inspira.babies.IndexInternal.global;
+import static com.inspira.cello.IndexInternal.global;
 
 public class SalesNavigationFragment extends Fragment implements OnMapReadyCallback, android.location.LocationListener {
     private Spinner spinner;

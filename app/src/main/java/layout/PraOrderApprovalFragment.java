@@ -20,16 +20,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.inspira.babies.IndexInternal;
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.inspira.babies.IndexExternal.global;
-import static com.inspira.babies.IndexExternal.jsonObject;
+import static com.inspira.cello.IndexExternal.global;
+import static com.inspira.cello.IndexExternal.jsonObject;
 
 public class PraOrderApprovalFragment extends Fragment implements View.OnClickListener{
     private Button btnApprove, btnDisapprove;

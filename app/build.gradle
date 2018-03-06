@@ -6,7 +6,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "com.inspira.babies"
+        applicationId "com.inspira.cello"
         minSdkVersion 17
         targetSdkVersion 24
         multiDexEnabled true //important
@@ -54,8 +54,3 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
 }
-
-
-
-
-apply plugin: 'com.google.gms.google-services'

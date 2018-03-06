@@ -1,16 +1,7 @@
 package layout;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
-import android.os.AsyncTask;
-import android.os.Environment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,32 +11,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.vision.text.Line;
-import com.inspira.babies.BuildConfig;
-import com.inspira.babies.GlobalVar;
-import com.inspira.babies.IndexInternal;
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.OkHttpDownloader;
+import com.inspira.cello.GlobalVar;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 
-import static android.content.ComponentCallbacks2.TRIM_MEMORY_BACKGROUND;
-import static com.inspira.babies.IndexInternal.global;
-import static com.inspira.babies.GMSbackgroundTask.listChatData;
-import static com.inspira.babies.GMSbackgroundTask.replaceMessage;
-import static com.inspira.babies.GMSbackgroundTask.saveChatData;
+import static com.inspira.cello.IndexInternal.global;
 
 /**
  * Created by Arta on 01-Dec-17.

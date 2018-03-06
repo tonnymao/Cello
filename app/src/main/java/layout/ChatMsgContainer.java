@@ -1,8 +1,8 @@
 package layout;
 
-import com.inspira.babies.LibInspira;
+import com.inspira.cello.LibInspira;
 
-import static com.inspira.babies.IndexInternal.global;
+import static com.inspira.cello.IndexInternal.global;
 
 /**
  * Created by Arta on 01-Dec-17.

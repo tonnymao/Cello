@@ -19,14 +19,14 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.inspira.babies.IndexInternal.global;
+import static com.inspira.cello.IndexInternal.global;
 
 //import android.app.Fragment;
 

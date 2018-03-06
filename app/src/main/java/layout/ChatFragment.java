@@ -3,16 +3,13 @@ package layout;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.Rect;
 import android.media.ExifInterface;
-import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,14 +17,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.BitmapCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -35,26 +29,20 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.inspira.babies.GMSbackgroundTask;
-import com.inspira.babies.GlobalVar;
-import com.inspira.babies.IndexInternal;
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.GMSbackgroundTask;
+import com.inspira.cello.GlobalVar;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -62,21 +50,17 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
-import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-import static com.inspira.babies.IndexInternal.global;
-import static com.inspira.babies.GMSbackgroundTask.listChatData;
-import static com.inspira.babies.GMSbackgroundTask.mSocket;
+import static com.inspira.cello.IndexInternal.global;
+import static com.inspira.cello.GMSbackgroundTask.listChatData;
+import static com.inspira.cello.GMSbackgroundTask.mSocket;
 
 /**
  * Created by Arta on 01-Dec-17.

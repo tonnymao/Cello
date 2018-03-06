@@ -13,10 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
-import static com.inspira.babies.IndexExternal.global;
+import static com.inspira.cello.IndexExternal.global;
 
 //import android.app.Fragment;
 

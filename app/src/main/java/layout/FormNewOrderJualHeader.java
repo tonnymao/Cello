@@ -30,12 +30,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.inspira.babies.GlobalVar;
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.GlobalVar;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -44,8 +43,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.inspira.babies.IndexInternal.global;
-import static com.inspira.babies.IndexInternal.jsonObject;
+import static com.inspira.cello.IndexInternal.global;
+import static com.inspira.cello.IndexInternal.jsonObject;
 
 public class FormNewOrderJualHeader extends Fragment implements View.OnClickListener{
 

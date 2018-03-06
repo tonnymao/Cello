@@ -15,8 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.inspira.babies.IndexInternal.global;
+import static com.inspira.cello.IndexInternal.global;
 
 public class SettingFragment extends Fragment implements View.OnClickListener, View.OnTouchListener{
     EditText edtInterval, edtRadius;

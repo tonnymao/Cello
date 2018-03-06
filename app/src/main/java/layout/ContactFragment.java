@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,9 +25,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.inspira.babies.GlobalVar;
-import com.inspira.babies.LibInspira;
-import com.inspira.babies.R;
+import com.inspira.cello.GlobalVar;
+import com.inspira.cello.LibInspira;
+import com.inspira.cello.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,11 +36,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.inspira.babies.IndexInternal.global;
-import static com.inspira.babies.IndexInternal.jsonObject;
-import static com.inspira.babies.IndexInternal.chatFrag;
-import static com.inspira.babies.GMSbackgroundTask.listChatData;
-import static com.inspira.babies.GMSbackgroundTask.mSocket;
+import static com.inspira.cello.IndexInternal.global;
+import static com.inspira.cello.IndexInternal.jsonObject;
+import static com.inspira.cello.IndexInternal.chatFrag;
+import static com.inspira.cello.GMSbackgroundTask.listChatData;
+import static com.inspira.cello.GMSbackgroundTask.mSocket;
 
 //import android.app.Fragment;
 
