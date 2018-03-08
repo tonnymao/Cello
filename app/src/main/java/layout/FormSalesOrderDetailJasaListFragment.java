@@ -132,7 +132,7 @@ public class FormSalesOrderDetailJasaListFragment extends FormSalesOrderDetailIt
                         itemadapter.notifyDataSetChanged();
                     }catch (Exception e){
                         e.printStackTrace();
-                        LibInspira.ShowShortToast(getContext(), "The current data is invalid. Please add new data.");
+                        LibInspira.showShortToast(getContext(), "The current data is invalid. Please add new data.");
                         LibInspira.setShared(global.temppreferences, global.temp.salesorder_pekerjaan, "");
                         strData = "";
                         refreshList();
@@ -204,7 +204,7 @@ public class FormSalesOrderDetailJasaListFragment extends FormSalesOrderDetailIt
             //pengecekan jika user tidak memilih item dan jasa namun ingin melanjutkan, maka tampilkan pesan error
             if (LibInspira.getShared(global.temppreferences, global.temp.salesorder_item, "").equals("") &&
                 LibInspira.getShared(global.temppreferences, global.temp.salesorder_pekerjaan, "").equals("")){
-                LibInspira.ShowLongToast(getContext(), "There is no item and pekerjaan to proceed. Please choose item or pekerjaan first.");
+                LibInspira.showLongToast(getContext(), "There is no item and pekerjaan to proceed. Please choose item or pekerjaan first.");
             }else {
                 LibInspira.ReplaceFragment(getActivity().getSupportFragmentManager(), R.id.fragment_container, new SummarySalesOrderFragment());
             }

@@ -145,7 +145,7 @@ public class FormSalesOrderDetailItemListFragment extends Fragment implements Vi
         else if(id==R.id.btnNext)
         {
             if(LibInspira.getShared(global.temppreferences, global.temp.salesorder_item, "").equals("")){
-                LibInspira.ShowShortToast(getContext(), "No item selected. Please add item to proceed");
+                LibInspira.showShortToast(getContext(), "No item selected. Please add item to proceed");
             }else{
                 LibInspira.ReplaceFragment(getActivity().getSupportFragmentManager(), R.id.fragment_container, new FormSalesOrderDetailJasaListFragment());
             }
@@ -229,7 +229,7 @@ public class FormSalesOrderDetailItemListFragment extends Fragment implements Vi
                         itemadapter.notifyDataSetChanged();
                     }catch (Exception e){
                         e.printStackTrace();
-                        LibInspira.ShowShortToast(getContext(), "The current data is invalid. Please add new data.");
+                        LibInspira.showShortToast(getContext(), "The current data is invalid. Please add new data.");
                         LibInspira.setShared(global.temppreferences, global.temp.salesorder_item, "");
                         strData = "";
                         refreshList();

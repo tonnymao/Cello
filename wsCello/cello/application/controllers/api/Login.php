@@ -120,138 +120,134 @@ class Login extends REST_Controller {
 		$result = "a";
 		
 		$data['data'] = array();
-		
+
+		$new_message ="lalalalala";
+
 		// START SEND NOTIFICATION
-        $vcGCMId = 'fS4WhyXLT2M:APA91bEKMcCVsHknYDrEnKXqDw6q_g7cRWsoJbTxRb-l3jMHzn2UD9RV1MiSAYhnYsWljt1ygiHlNvDb6toom35JUG9RJP8eTC-jOYQDaiD6lkCQ7M-V5LWJDDtXeVbAiDlX0sc_dqnc';
-		
-        $this->send_gcm($vcGCMId, $this->ellipsis('$new_message'),'New Message(s) From ','PrivateMessage','0','0');
-        
-		
-		
+        $vcGCMId = 'f9SX7qjc2u0:APA91bHQBkMgwwOenJx8kujj4M0-0UxQ_R7QgU0HvhwGpIyzEKo8O0QXll7S_nC7TFypjersrOpWKcGhwnn7pQNTClnDX4_GlXrSCLA8RBeqhARpXstN7duufMU0uEWuMe9cJ2W7bz1k';
+
+        $this->send_gcm($vcGCMId, $this->ellipsis($new_message),'New Message(s) From ','PrivateMessage','0','0');
 		$this->response($vcGCMId);
-		
-		/*
-		$regisID = array();
-			
-		$query_getuser = " SELECT 
-							a.gcmid
-							FROM whuser_mobile a 
-							JOIN whrole_mobile b ON a.nomorrole = b.nomor
-							WHERE a.status_aktif > 0 AND (a.gcmid <> '' AND a.gcmid IS NOT NULL) AND b.approveberitaacara = 1 ";
-		$result_getuser = $this->db->query($query_getuser);
-
-		if( $result_getuser && $result_getuser->num_rows() > 0){
-			foreach ($result_getuser->result_array() as $r_user){
-
-				// START SEND NOTIFICATION
-				$vcGCMId = $r_user['gcmid'];
-				if( $vcGCMId != "null" ){      
-					array_push($regisID, $vcGCMId);       
-				}
-				
-			}
-			$count = $this->db->query("SELECT COUNT(1) AS elevasi_baru FROM mhberitaacara a WHERE a.status_disetujui = 0")->row()->elevasi_baru; 
-			$this->send_gcm_group($regisID, $this->ellipsis("Berita Acara Elevasi"),$count . ' pending elevasi','ChooseApprovalElevasi','','');
-		} 
-		*/
 	}
+
 
 	// --- POST Login --- //
 	function loginUser_post()
-	{     
+	{
         $data['data'] = array();
 
         $value = file_get_contents('php://input');
 		$jsonObject = (json_decode($value , true));
 
-        $user = (isset($jsonObject["username"]) ? $this->clean($jsonObject["username"])     : "a");
-        $pass = md5((isset($jsonObject["password"]) ? $this->clean($jsonObject["password"]) : "a"));
-        $token = (isset($jsonObject["token"]) ? $jsonObject["token"]     : "a");
+        $user = (isset($jsonObject["username"]) ? $this->clean($jsonObject["username"])     : "");
+        $pass = md5((isset($jsonObject["password"]) ? $this->clean($jsonObject["password"]) : ""));
+        $token = (isset($jsonObject["token"]) ? $jsonObject["token"]     : "");
+
+        //print_r($user.$pass);
 
 //        $interval  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 1 LIMIT 1")->row()->intnilai;
 //        $radius    = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 2 LIMIT 1")->row()->intnilai;
 //        $tracking  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 3 LIMIT 1")->row()->intnilai;
 //        $jam_awal  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 6 LIMIT 1")->row()->intnilai;
 //        $jam_akhir = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 7 LIMIT 1")->row()->intnilai;
-		
-//		$query1 = "	UPDATE mhadmin a
-//                    SET hash = UUID(),
-//                    gcm_id = '$token'
-//                    WHERE a.status_aktif = 1
-//                    AND a.kode = '$user'
-//                    AND BINARY a.sandi = '$pass'";
-//        $this->db->query($query1);
+
+        $query = "  UPDATE mhadmin a
+                    SET hash = UUID(),
+                    gcm_id = '$token'
+                    WHERE a.status_aktif > 0
+                    AND a.kode = ?
+                    AND BINARY a.sandi= ?";
+        $this->db->query($query, array($user, $pass));
 
 //        $query = "	SELECT
-//                        a.nomor AS nomor,
-//                        a.sandi AS `password`,
-//                        a.nomormhpegawai AS nomor_pegawai,
-//                        d.kode AS kode_pegawai,
-//                        a.nama AS nama,
-//                        a.role_android AS role,
-//                        a.hash AS `hash`,
-//                        a.nomormhcabang AS cabang,
-//                        e.nama AS namacabang,
-//                        b.isdriver AS isdriver,
-//                        b.qrcodereader AS qrcodereader,
-//                        b.checkin AS checkin,
-//                        b.cantracked AS cantracked,
-//                        b.cantracking AS cantracking
-//                    FROM mhadmin a
-//                    JOIN whrole_mobile b ON a.role_android = b.nomor
-//                    LEFT JOIN mhpegawai d ON a.nomormhpegawai = d.nomor
-//                    JOIN mhcabang e ON a.nomormhcabang = e.nomor
-//                    WHERE a.status_aktif = 1
-//                    AND LOWER(a.kode) = '$user'
-//                    AND BINARY a.sandi = '$pass'";
-        $query = "SELECT
-                  	a.nomor AS nomor,
-                  	a.sandi AS `password`,
-                  	a.nama AS nama,
-                  	a.nomormhcabang AS cabang,
-                  	e.nama AS namacabang
-                  FROM mhadmin a
-                  JOIN mhcabang e ON a.nomormhcabang = e.nomor
-                  WHERE a.status_aktif = 1
-                      AND LOWER(a.kode) = '$user'
-                      AND BINARY a.sandi = '$pass' ";
+//						a.nomor AS nomor,
+//						a.nomor AS nomor_android,
+//						a.userType AS user_tipe,
+//						#a.nomormhadmingrup AS usertipe,
+//						a.sandi AS `password`,
+//						a.nomormhsales AS nomor_sales,
+//						c.kode AS kode_sales,
+//						a.nama AS nama,
+//						a.nomormhadmingrup AS role,
+//						a.hash AS `hash`,
+//						IFNULL(c.hp, '') AS telp,
+//						a.nomormhcabang AS cabang,
+//						d.nama AS namacabang,
+//						d.kode as kodecabang,
+//						b.mobile_isowner AS isowner,
+//						b.mobile_issales AS issales,
+//						b.mobile_setting AS setting,
+//						b.mobile_settingtarget AS settingtarget,
+//						b.mobile_salesorder AS salesorder,
+//						b.mobile_stockmonitoring AS stockmonitoring,
+//						b.mobile_pricelist AS pricelist,
+//						b.mobile_addscheduletask AS addscheduletask,
+//						b.mobile_salestracking AS salestracking,
+//						b.mobile_hpp AS hpp,
+//						b.mobile_crossbranch AS crossbranch,
+//						b.mobile_creategroup AS creategroup
+//					FROM mhadmin a
+//					JOIN mhadmingrup b ON a.nomormhadmingrup = b.nomor
+//					LEFT JOIN mhsales c ON a.nomormhsales = c.nomor
+//					JOIN mhcabang d ON a.nomormhcabang = d.nomor
+//					WHERE a.status_aktif = 1
+//					AND a.kode = '$user'
+//					AND BINARY a.sandi = '$pass'";
+
+        $query = "	SELECT
+                        a.nomor AS nomor,
+                        a.sandi AS `password`,
+                        a.nomormhsales AS nomor_sales,
+                        c.kode AS kode_sales,
+                        a.nama AS nama,
+                        a.nomormhadmingrup AS role,
+                        b.nama AS namaadmingrup,
+                        a.hash AS `hash`,
+                        a.nomormhcabang AS cabang,
+                        d.kode AS kodecabang,
+                        d.nama AS namacabang
+                    FROM mhadmin a
+                    JOIN mhadmingrup b ON a.nomormhadmingrup = b.nomor
+                    LEFT JOIN mhsales c ON a.nomormhsales = c.nomor
+                    JOIN mhcabang d ON a.nomormhcabang = d.nomor
+                    WHERE a.status_aktif = 1
+                        AND a.kode = '$user'
+                        AND BINARY a.sandi = '$pass'";
         $result = $this->db->query($query, array($user, $pass));
-
-        if( $result && $result->num_rows() > 0){
-            foreach ($result->result_array() as $r){
-
-                array_push($data['data'], array(
-                                                'user_nomor'    	    		=> $r['nomor'],
-                                                'user_password'					=> $r['password'],
-                                                'user_nomor_pegawai'         	=> $r['nomor_pegawai'],
-                                                'user_kode_pegawai'        		=> $r['kode_pegawai'],
-                                                'user_nama' 					=> $r['nama'],
-                                                'user_role' 					=> $r['role'],
-                                                'user_hash' 					=> $r['hash'],
-                                                'user_cabang' 					=> $r['cabang'],
-                                                'user_nama_cabang' 				=> $r['namacabang'],
-                                                'role_isdriver'					=> $r['isdriver'],
-                                                'role_qrcodereader' 			=> $r['qrcodereader'],
-                                                'role_checkin'					=> $r['checkin'],
-                                                'role_cantracked'				=> $r['cantracked'],
-                                                'role_cantracking'				=> $r['cantracking'],
-                                                )
-                );
+        if($result){
+            if($result->num_rows() > 0){
+                foreach ($result->result_array() as $r){
+                    array_push($data['data'], array(
+                                                    'user_nomor'                    => $r['nomor'],
+                                                    'user_password'					=> $r['password'],
+                                                    'user_nomor_sales'         		=> $r['nomor_sales'],
+                                                    'user_kode_sales'         		=> $r['kode_sales'],
+                                                    'user_nama' 					=> $r['nama'],
+                                                    'user_role' 					=> $r['role'],
+                                                    'user_nama_admin_grup'          => $r['namaadmingrup'],
+                                                    'user_hash' 					=> $r['hash'],
+                                                    'user_cabang' 					=> $r['cabang'],
+                                                    'user_kode_cabang' 				=> $r['kodecabang'],
+                                                    'user_nama_cabang' 				=> $r['namacabang']
+                                                    )
+                    );
+                }
+            }else{
+                array_push($data['data'], array( 'message' => "No user found"));
             }
         }else{
-            array_push($data['data'], array( 'query' => $this->error($query1) ));
-        }
+			array_push($data['data'], array( 'query' => $this->error($query) ));
+		}
 
         if ($data){
             // Set the response and exit
             $this->response($data['data']); // OK (200) being the HTTP response code
         }
-
     }
-	
+
 	// --- POST GPS tracking system --- //
 	function gpsTracking_post()
-	{     
+	{
         $data['data'] = array();
 
         $value = file_get_contents('php://input');
@@ -260,105 +256,132 @@ class Login extends REST_Controller {
         array_push($data['data'], array(
 			'id'				=> $r['id'],
 			'latitude'			=> $r['latitude'],
-			'longitude'			=> $r['longitude'], 
+			'longitude'			=> $r['longitude'],
 			)
 		);
-	
+
         if ($data){
             // Set the response and exit
             $this->response($data['data']); // OK (200) being the HTTP response code
         }
 
     }
-	
-	function checkUser_post()
-	{     
+
+    function getVersion_post(){
+
         $data['data'] = array();
 
         $value = file_get_contents('php://input');
-		$jsonObject = (json_decode($value , true));
+        $jsonObject = (json_decode($value , true));
 
-        $hash = (isset($jsonObject["hash"]) ? $jsonObject["hash"]     : "");
+        $version  = $this->db->query("SELECT a.version FROM whversion_mobile a ORDER BY nomor DESC LIMIT 1")->row()->version;
+        $url      = $this->db->query("SELECT a.url FROM whversion_mobile a ORDER BY nomor DESC LIMIT 1")->row()->url;
 
-//        $interval  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 1 LIMIT 1")->row()->intnilai;
-//        $radius    = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 2 LIMIT 1")->row()->intnilai;
-//		$tracking  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 3 LIMIT 1")->row()->intnilai;
-//		$jam_awal  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 6 LIMIT 1")->row()->intnilai;
-//		$jam_akhir = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 7 LIMIT 1")->row()->intnilai;
-
-        $token = (isset($jsonObject["token"]) ? $jsonObject["token"]     : "a");
-		
-        $query = "	SELECT 
-                        a.nomor AS nomor,
-                        a.sandi AS `password`,
-                        a.nomormhpegawai AS nomor_pegawai,
-                        d.kode AS kode_pegawai,
-                        a.nama AS nama,
-                        a.role_android AS role,
-                        a.hash AS `hash`,
-                        a.nomormhcabang AS cabang,
-                        e.nama AS namacabang,
-                        b.isdriver AS isdriver,
-                        b.qrcodereader AS qrcodereader,
-                        b.checkin AS checkin,
-                        b.cantracked AS cantracked,
-                        b.cantracking AS cantracking
-                    FROM mhadmin a
-                    JOIN whrole_mobile b ON a.role_android = b.nomor
-                    LEFT JOIN mhpegawai d ON a.nomormhpegawai = d.nomor
-                    JOIN mhcabang e ON a.nomormhcabang = e.nomor
-                    WHERE a.status_aktif = 1
-                    AND hash = '$hash'";
-        $result = $this->db->query($query);
-
-        if( $result && $result->num_rows() > 0)
-		{
-			foreach ($result->result_array() as $r)
-			{
-				array_push($data['data'], array(
-													'success'						=> "true",
-													'user_nomor_android'			=> $r['nomor_android'],
-													'user_nomor' 					=> $r['nomor'],
-													'user_nomor_sales'         		=> $r['nomor_sales'],
-													'user_kode_sales'         		=> $r['kode_sales'],  //added by Tonny
-													'user_password'					=> $r['password'],
-													'user_nama' 					=> $r['nama'], 
-													'user_tipe' 					=> $r['tipe'], 
-													'user_role' 					=> $r['role'], 
-													'user_hash' 					=> $r['hash'],
-													'user_telp' 					=> $r['telp'],
-													'user_cabang' 					=> $r['cabang'],
-													'user_nama_cabang' 				=> $r['namacabang'],  //added by Tonny
-													'role_isowner'					=> $r['isowner'],
-													'role_issales'					=> $r['issales'],
-													'role_setting'					=> $r['setting'],
-													'role_settingtarget'			=> $r['settingtarget'],
-													'role_salesorder'				=> $r['salesorder'],
-													'role_stockmonitoring'			=> $r['stockmonitoring'],
-													'role_pricelist'				=> $r['pricelist'],
-													'role_addscheduletask'			=> $r['addscheduletask'],
-													'role_salestracking'			=> $r['salestracking'],
-													'role_hpp'          			=> $r['hpp'],
-                                                    'role_crossbranch'  			=> $r['crossbranch'],
-                                                    'role_creategroup'  			=> $r['creategroup'],
-                                                    'setting_interval'  			=> $interval,
-                                                    'setting_radius'      			=> $radius,
-                                                    'setting_tracking'  			=> $tracking,
-                                                    'setting_jamawal'     			=> $jam_awal,
-                                                    'setting_jamakhir'  			=> $jam_akhir
-											)
-				);
-			}
-        }
-		else
-		{		
-			array_push($data['data'], array( 'success' => "false" ));
-		}  
+        array_push($data['data'], array(
+                                        'version' 	=> $version,
+                                        'url'	=> $url
+                                        )
+        );
 
         if ($data){
             // Set the response and exit
             $this->response($data['data']); // OK (200) being the HTTP response code
         }
+    }
 
+    function checkUser_post()
+	{
+        $data['data'] = array();
+		$value = file_get_contents('php://input');
+		$jsonObject = (json_decode($value , true));
+
+        $hash = (isset($jsonObject["hash"]) ? $jsonObject["hash"]     : "");
+//        $interval  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 1 LIMIT 1")->row()->intnilai;
+//        $radius    = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 2 LIMIT 1")->row()->intnilai;
+//		$tracking  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 3 LIMIT 1")->row()->intnilai;
+//		$jam_awal  = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 6 LIMIT 1")->row()->intnilai;
+//		$jam_akhir = $this->db->query("SELECT intnilai FROM whsetting_mobile WHERE intNomor = 7 LIMIT 1")->row()->intnilai;
+//        $query = "	SELECT
+//						a.nomor AS nomor,
+//						a.nomor AS nomor_android,
+//						a.userType AS user_tipe,
+//						a.sandi AS `password`,
+//						a.nomormhsales AS nomor_sales,
+//						c.kode AS kode_sales,
+//						a.nama AS nama,
+//						a.nomormhadmingrup AS role,
+//						a.hash AS `hash`,
+//						IFNULL(c.hp, '') AS telp,
+//						a.nomormhcabang AS cabang,
+//						d.nama AS namacabang,
+//						d.kode as kodecabang,
+//						b.mobile_isowner AS isowner,
+//						b.mobile_issales AS issales,
+//						b.mobile_setting AS setting,
+//						b.mobile_settingtarget AS settingtarget,
+//						b.mobile_salesorder AS salesorder,
+//						b.mobile_stockmonitoring AS stockmonitoring,
+//						b.mobile_pricelist AS pricelist,
+//						b.mobile_addscheduletask AS addscheduletask,
+//						b.mobile_salestracking AS salestracking,
+//						b.mobile_hpp AS hpp,
+//						b.mobile_crossbranch AS crossbranch,
+//						b.mobile_creategroup AS creategroup
+//					FROM mhadmin a
+//					JOIN mhadmingrup b ON a.nomormhadmingrup = b.nomor
+//					LEFT JOIN mhsales c ON a.nomormhsales = c.nomor
+//					JOIN mhcabang d ON a.nomormhcabang = d.nomor
+//					WHERE a.status_aktif = 1
+//						AND hash = '$hash'";
+
+        $query = "	SELECT
+                        a.nomor AS nomor,
+                        a.sandi AS `password`,
+                        a.nomormhsales AS nomor_sales,
+                        c.kode AS kode_sales,
+                        a.nama AS nama,
+                        a.nomormhadmingrup AS role,
+                        b.nama AS namaadmingrup,
+                        a.hash AS `hash`,
+                        a.nomormhcabang AS cabang,
+                        d.kode AS kodecabang,
+                        d.nama AS namacabang
+                    FROM mhadmin a
+                    JOIN mhadmingrup b ON a.nomormhadmingrup = b.nomor
+                    LEFT JOIN mhsales c ON a.nomormhsales = c.nomor
+                    JOIN mhcabang d ON a.nomormhcabang = d.nomor
+                    WHERE a.status_aktif = 1
+                        AND a.hash = '$hash' ";
+        $result = $this->db->query($query);
+
+        if($result){
+            if($result->num_rows() > 0){
+                foreach ($result->result_array() as $r){
+                    array_push($data['data'], array(
+                                                    'user_nomor'                    => $r['nomor'],
+                                                    'user_password'					=> $r['password'],
+                                                    'user_nomor_sales'         		=> $r['nomor_sales'],
+                                                    'user_kode_sales'         		=> $r['kode_sales'],
+                                                    'user_nama' 					=> $r['nama'],
+                                                    'user_role' 					=> $r['role'],
+                                                    'user_nama_admin_grup'          => $r['namaadmingrup'],
+                                                    'user_hash' 					=> $r['hash'],
+                                                    'user_cabang' 					=> $r['cabang'],
+                                                    'user_kode_cabang' 				=> $r['kodecabang'],
+                                                    'user_nama_cabang' 				=> $r['namacabang']
+                                                    )
+                    );
+                }
+            }else{
+                array_push($data['data'], array( 'message' => "No user found"));
+            }
+        }else{
+            array_push($data['data'], array( 'query' => $this->error($query) ));
+        }
+
+        if ($data){
+            // Set the response and exit
+            $this->response($data['data']); // OK (200) being the HTTP response code
+        }
     }
 }

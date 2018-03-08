@@ -361,13 +361,13 @@ public class SummarySalesOrderFragment extends Fragment implements View.OnClickL
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowShortToast(getContext(), "Data has been successfully added");
+                            LibInspira.showShortToast(getContext(), "Data has been successfully added");
                             LibInspira.clearShared(global.temppreferences); //hapus cache jika data berhasil ditambahkan
                             LibInspira.BackFragmentCount(getFragmentManager(), 6);  //kembali ke menu depan sales order
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "Adding new data failed");
+                            LibInspira.showShortToast(getContext(), "Adding new data failed");
                             LibInspira.hideLoading();
                         }
                     }
@@ -376,7 +376,7 @@ public class SummarySalesOrderFragment extends Fragment implements View.OnClickL
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "Adding new data failed");
+                LibInspira.showShortToast(getContext(), "Adding new data failed");
                 LibInspira.hideLoading();
             }
         }

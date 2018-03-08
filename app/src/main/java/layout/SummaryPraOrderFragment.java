@@ -201,7 +201,7 @@ public class SummaryPraOrderFragment extends Fragment implements View.OnClickLis
             if(LibInspira.getShared(global.temppreferences, global.temp.praorder_selected_list_status, "").equals("1"))
             {
                 //btnEdit.setVisibility(View.GONE);
-                LibInspira.ShowLongToast(getActivity(),"Tidak bisa diedit karena sudah di APPROVE");
+                LibInspira.showLongToast(getActivity(),"Tidak bisa diedit karena sudah di APPROVE");
             }
             else
             {
@@ -215,7 +215,7 @@ public class SummaryPraOrderFragment extends Fragment implements View.OnClickLis
                     trimDataShared(LibInspira.getShared(global.temppreferences, global.temp.praorder_summary, ""));
                 }
                 else{
-                    LibInspira.ShowShortToast(getActivity(),"error load data header");
+                    LibInspira.showShortToast(getActivity(),"error load data header");
                 }
 
                 // di isi list dr item list
@@ -224,7 +224,7 @@ public class SummaryPraOrderFragment extends Fragment implements View.OnClickLis
                             LibInspira.getShared(global.temppreferences, global.temp.praorder_item, ""));
                 }
                 else{
-                    LibInspira.ShowShortToast(getActivity(),"error load data list items");
+                    LibInspira.showShortToast(getActivity(),"error load data list items");
                 }
 
                 LibInspira.ReplaceFragment(getActivity().getSupportFragmentManager(), R.id.fragment_container, new FormNewPraOrderHeader());
@@ -451,13 +451,13 @@ public class SummaryPraOrderFragment extends Fragment implements View.OnClickLis
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowShortToast(getContext(), "Data has been successfully added");
+                            LibInspira.showShortToast(getContext(), "Data has been successfully added");
                             LibInspira.clearShared(global.temppreferences); //hapus cache jika data berhasil ditambahkan
                             LibInspira.BackFragmentCount(getFragmentManager(), 6);  //kembali ke menu depan sales order
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "Adding new data failed");
+                            LibInspira.showShortToast(getContext(), "Adding new data failed");
                             LibInspira.hideLoading();
                         }
                     }
@@ -466,7 +466,7 @@ public class SummaryPraOrderFragment extends Fragment implements View.OnClickLis
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "Adding new data failed");
+                LibInspira.showShortToast(getContext(), "Adding new data failed");
                 LibInspira.hideLoading();
             }
         }

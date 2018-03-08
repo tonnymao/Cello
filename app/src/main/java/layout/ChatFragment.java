@@ -387,7 +387,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             return imgFile.getPath();
         }else
         {
-            LibInspira.ShowShortToast(con,"Something Wrong cant save file");
+            LibInspira.showShortToast(con,"Something Wrong cant save file");
             return "";
         }
 
@@ -443,7 +443,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 }
                 if (resultCode == Activity.RESULT_CANCELED) {
                     //Write your code if there's no result
-                    LibInspira.ShowShortToast(con,"cam result canceled");
+                    LibInspira.showShortToast(con,"cam result canceled");
                 }
             } else if (requestCode == GALLERY_PIC_REQUEST_CODE) {
                 if(data != null) {
@@ -455,12 +455,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     }
                     if (resultCode == Activity.RESULT_CANCELED) {
                         //Write your code if there's no result
-                        LibInspira.ShowShortToast(con, "gallery result canceled");
+                        LibInspira.showShortToast(con, "gallery result canceled");
                     }
                 }
                 else
                 {
-                    LibInspira.ShowShortToast(con,"no image selected");
+                    LibInspira.showShortToast(con,"no image selected");
                 }
             }
 
@@ -468,7 +468,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         catch (Exception e)
         {
             Log.d(TAG,e.toString());
-            LibInspira.ShowShortToast(con,"Something Went Wrong");
+            LibInspira.showShortToast(con,"Something Went Wrong");
         }
     }
 
@@ -479,12 +479,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
         if (requestCode == CAMERA_PIC_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                LibInspira.ShowShortToast(getContext(), "camera granted");
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                LibInspira.showShortToast(getContext(), "camera granted");
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST_CODE);
 
             } else {
-                LibInspira.ShowShortToast(getContext(), "camera denied");
+                LibInspira.showShortToast(getContext(), "camera denied");
 
             }
         }
@@ -510,7 +510,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             myBitmap = Bitmap.createBitmap(myBitmap, 0, 0, myBitmap.getWidth(), myBitmap.getHeight(), matrix, true);
         }
         catch (IOException e) {
-            LibInspira.ShowShortToast(getContext(), "rotate Fail");
+            LibInspira.showShortToast(getContext(), "rotate Fail");
         }
         return myBitmap;
     }

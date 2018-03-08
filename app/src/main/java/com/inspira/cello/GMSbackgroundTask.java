@@ -70,6 +70,7 @@ public class GMSbackgroundTask extends Service implements LocationListener {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         if(!globalVar.settingpreferences.getString("jam_awal", "").equals(""))
         {
             globalVar = new GlobalVar(this);
@@ -676,16 +677,6 @@ public class GMSbackgroundTask extends Service implements LocationListener {
             for (int i = 0; i < listChatData.get(tempPost).getChatMsgData().size(); i++) {
                 if (!prevId.equals("")) {
                     if (listChatData.get(tempPost).getChatMsgData().get(i).getId().equals(prevId)) {
-
-//                        if(listChatData.get(tempPost).getChatMsgData().get(i).getMsgType().equals(ChatMsgContainer.message_data_type_picture)
-//                                && ChatMsgContainer.isYou(listChatData.get(tempPost).getChatMsgData().get(i)))
-//                        {
-//                            listChatData.get(tempPost).getChatMsgData().get(i).copy(newMsgData,ChatMsgContainer.message_data_type_picture);
-//                        }
-//                        else
-//                        {
-//                            listChatData.get(tempPost).getChatMsgData().get(i).copy(newMsgData);
-//                        }
                         listChatData.get(tempPost).getChatMsgData().get(i).copy(newMsgData);
                         flag = 1;
                         Log.d(TAG, "by previd replace id " + newMsgData.getId());
@@ -693,16 +684,6 @@ public class GMSbackgroundTask extends Service implements LocationListener {
                     }
                 } else {
                     if (listChatData.get(tempPost).getChatMsgData().get(i).getId().equals(newMsgData.getId())) {
-
-//                        if(listChatData.get(tempPost).getChatMsgData().get(i).getMsgType().equals(ChatMsgContainer.message_data_type_picture)
-//                                && ChatMsgContainer.isYou(listChatData.get(tempPost).getChatMsgData().get(i)))
-//                        {
-//                            listChatData.get(tempPost).getChatMsgData().get(i).copy(newMsgData,ChatMsgContainer.message_data_type_picture);
-//                        }
-//                        else
-//                        {
-//                            listChatData.get(tempPost).getChatMsgData().get(i).copy(newMsgData);
-//                        }
                         listChatData.get(tempPost).getChatMsgData().get(i).copy(newMsgData);
                         flag = 1;
                         Log.d(TAG, "by id replace id " + newMsgData.getId());
@@ -715,8 +696,6 @@ public class GMSbackgroundTask extends Service implements LocationListener {
                 Log.d(TAG, "add id " + newMsgData.getId());
             }
         }
-        //Log.d("msglala","4 size "+listChatData.get(tempPost).getChatMsgData().size()+"");
-        //chatFrag.setAdapter(listChatData.get(tempPost));
         saveChatData(listChatData);
     }
 
@@ -811,10 +790,11 @@ public class GMSbackgroundTask extends Service implements LocationListener {
     public int onStartCommand(Intent intent, int flags, int startId) {
         //onTaskRemoved(intent);
 
-        Message msg = mServiceHandler.obtainMessage();
-        msg.arg1 = startId;
-        mServiceHandler.sendMessage(msg);
-
+        if(mServiceHandler != null){
+            Message msg = mServiceHandler.obtainMessage();
+            msg.arg1 = startId;
+            mServiceHandler.sendMessage(msg);
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -832,17 +812,12 @@ public class GMSbackgroundTask extends Service implements LocationListener {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Log.i("GMSbackgroundTask", "current time: " + currentTimeValue + " start: " + startState + " end: " + endState);
             if (Integer.valueOf(currentTimeValue) >= startState && Integer.valueOf(currentTimeValue) <= endState) {
-//            if (GpsStopped)
-//                requestPassivelocation();
                 requestGPSlocation();
                 if (trackingType.equals("GPS and Network"))
                     requestNetworklocation();
-//                LibInspira.ShowLongToast(getApplicationContext(), "location requested");
             }
-//            LibInspira.ShowLongToast(getApplicationContext(), LibInspira.getShared(global.userpreferences, global.user.nomor, ""));
             if (LibInspira.getShared(IndexInternal.global.userpreferences, IndexInternal.global.user.nomor, "") == "")
                 stopSelf(msg.arg1);
-            //stopSelf(msg.arg1); <- don't use, ur gonna kill this
         }
     }
 
@@ -963,8 +938,8 @@ public class GMSbackgroundTask extends Service implements LocationListener {
                 oldLatitude = location.getLatitude();
                 oldLongitude = location.getLongitude();
                 String actionUrl = "Sales/pushTrackingData/";
-                new pushTrackingGPStoDB(globalVar.userpreferences.getString("nomor", ""), globalVar.userpreferences.getString("nomor_sales", ""), location).execute(actionUrl);
-                Log.d("GMSbackgroundTask", "Location on radius");
+//                new pushTrackingGPStoDB(globalVar.userpreferences.getString("nomor", ""), globalVar.userpreferences.getString("nomor_sales", ""), location).execute(actionUrl);
+//                Log.d("GMSbackgroundTask", "Location on radius");
             }
         }
         else
@@ -974,10 +949,8 @@ public class GMSbackgroundTask extends Service implements LocationListener {
             Log.d("GMSbackgroundTask", "Location updated");
         }
         try {
-//            LibInspira.ShowLongToast(getApplicationContext(), LibInspira.getShared(global.userpreferences, global.user.nomor, ""));
             if (LibInspira.getShared(IndexInternal.global.userpreferences, IndexInternal.global.user.nomor, "") == "")
                 locationManager.removeUpdates(this);
-//            LibInspira.ShowLongToast(getApplicationContext(), "sleeps " + trackingInterval);
             Thread.sleep(trackingInterval);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -1078,10 +1051,10 @@ public class GMSbackgroundTask extends Service implements LocationListener {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
-        notificationBuilder.setContentTitle("BABIES : "+title);
+        notificationBuilder.setContentTitle("Cello : "+title);
         notificationBuilder.setContentText(message);
         notificationBuilder.setAutoCancel(true);
-        notificationBuilder.setSmallIcon(R.mipmap.logo);//logo babies
+        notificationBuilder.setSmallIcon(R.mipmap.logo);//logo cello
         notificationBuilder.setContentIntent(pendingIntent);
         //notificationBuilder.setDeleteIntent(createOnDismissedIntent(this,0)); //0 = notificationID;
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

@@ -105,7 +105,7 @@ public class OrderJualDetailHeaderFragment extends Fragment implements View.OnCl
             if(LibInspira.getShared(global.temppreferences, global.temp.orderjual_selected_list_status, "").equals("1"))
             {
                 //btnEdit.setVisibility(View.GONE);
-                LibInspira.ShowLongToast(getActivity(),"Tidak bisa diedit karena sudah di APPROVE");
+                LibInspira.showLongToast(getActivity(),"Tidak bisa diedit karena sudah di APPROVE");
             }
             else
             {
@@ -125,7 +125,7 @@ public class OrderJualDetailHeaderFragment extends Fragment implements View.OnCl
                     trimDataShared(LibInspira.getShared(global.temppreferences, global.temp.orderjual_summary, ""));
                 }
                 else{
-                    LibInspira.ShowShortToast(getActivity(),"error load data header");
+                    LibInspira.showShortToast(getActivity(),"error load data header");
                 }
 
                 // di isi list dr item list
@@ -134,7 +134,7 @@ public class OrderJualDetailHeaderFragment extends Fragment implements View.OnCl
                             LibInspira.getShared(global.temppreferences, global.temp.orderjual_item, ""));
                 }
                 else{
-                    LibInspira.ShowShortToast(getActivity(),"error load data list items");
+                    LibInspira.showShortToast(getActivity(),"error load data list items");
                 }
 
                 LibInspira.ReplaceFragment(getActivity().getSupportFragmentManager(), R.id.fragment_container, new FormNewOrderJualHeader());

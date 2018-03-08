@@ -137,7 +137,7 @@ public class SummaryScheduleFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.d("resultQuery", result);
-            LibInspira.ShowLongToast(getContext(), "Schedule Created");
+            LibInspira.showLongToast(getContext(), "Schedule Created");
             LibInspira.clearShared(global.schedulepreferences);
             LibInspira.ReplaceFragment(getFragmentManager(), R.id.fragment_container, new DashboardInternalFragment());
 

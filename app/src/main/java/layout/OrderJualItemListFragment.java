@@ -258,7 +258,7 @@ public class OrderJualItemListFragment extends Fragment implements View.OnClickL
                         itemadapter.notifyDataSetChanged();
                     }catch (Exception e){
                         e.printStackTrace();
-                        LibInspira.ShowShortToast(getContext(), "The current data is invalid. Please add new data.");
+                        LibInspira.showShortToast(getContext(), "The current data is invalid. Please add new data.");
                         LibInspira.setShared(
                                 global.temppreferences,
                                 global.temp.orderjual_item,

@@ -252,7 +252,7 @@ public class FormNewOrderJualHeader extends Fragment implements View.OnClickList
 
                     }catch (Exception e){
                         e.printStackTrace();
-                        LibInspira.ShowShortToast(getContext(), "The current data is invalid. Please add new data.");
+                        LibInspira.showShortToast(getContext(), "The current data is invalid. Please add new data.");
                         setAdapterValuta(LibInspira.getShared(
                                 global.datapreferences,
                                 global.data.valuta, ""));
@@ -317,7 +317,7 @@ public class FormNewOrderJualHeader extends Fragment implements View.OnClickList
             }
             else
             {
-                LibInspira.ShowLongToast(getContext(),"Pilih Customer terlebih dahulu");
+                LibInspira.showLongToast(getContext(),"Pilih Customer terlebih dahulu");
             }
         }
 //        else if(id == R.id.btnSave)
@@ -346,7 +346,7 @@ public class FormNewOrderJualHeader extends Fragment implements View.OnClickList
                     LibInspira.getShared(global.temppreferences, global.temp.orderjual_praorder_nomor, "").equals("")
                     )
             {
-                LibInspira.ShowShortToast(getContext(), "All Field Required");
+                LibInspira.showShortToast(getContext(), "All Field Required");
             }
             else
             {

@@ -171,7 +171,7 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
                     }
                     else
                     {
-                        LibInspira.ShowLongToast(getActivity(),"Data Item Masih Kosong");
+                        LibInspira.showLongToast(getActivity(),"Data Item Masih Kosong");
                     }
 
                     }
@@ -279,7 +279,7 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
                             }
                         }catch (Exception e){
                             e.printStackTrace();
-                            LibInspira.ShowShortToast(getContext(), "The current data is invalid. Please add new data.");
+                            LibInspira.showShortToast(getContext(), "The current data is invalid. Please add new data.");
                             LibInspira.setShared(global.temppreferences, global.temp.praorder_item_add, "");
                             strData = "";
                             refreshList();
@@ -717,13 +717,13 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowLongToast(getContext(), "Data has been successfully added");
+                            LibInspira.showLongToast(getContext(), "Data has been successfully added");
                             LibInspira.clearShared(global.temppreferences); //hapus cache jika data berhasil ditambahkan
                             LibInspira.BackFragmentCount(getFragmentManager(), 3);  //kembali ke menu depan sales order
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "Adding new data failed err:query");
+                            LibInspira.showShortToast(getContext(), "Adding new data failed err:query");
                             LibInspira.hideLoading();
                         }
                     }
@@ -732,7 +732,7 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "Adding new data failed err:network");
+                LibInspira.showShortToast(getContext(), "Adding new data failed err:network");
                 LibInspira.hideLoading();
             }
         }
@@ -784,7 +784,7 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowLongToast(getContext(), "Data has been successfully DELETED");
+                            LibInspira.showLongToast(getContext(), "Data has been successfully DELETED");
                             deleteSelectedItem(Integer.parseInt(LibInspira.getShared(global.temppreferences, global.temp.praorder_delete_item_index,"")));
 
                             //reset
@@ -794,7 +794,7 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "DELETE data failed err:query/DB");
+                            LibInspira.showShortToast(getContext(), "DELETE data failed err:query/DB");
                             LibInspira.hideLoading();
                         }
                     }
@@ -803,7 +803,7 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "DELETE data failed err:network");
+                LibInspira.showShortToast(getContext(), "DELETE data failed err:network");
                 LibInspira.hideLoading();
             }
         }
@@ -865,14 +865,14 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowLongToast(getContext(), "Data has been successfully EDITED");
+                            LibInspira.showLongToast(getContext(), "Data has been successfully EDITED");
                             //setupStart();
                             //LibInspira.clearShared(global.temppreferences); //hapus cache jika data berhasil ditambahkan
                             LibInspira.BackFragmentCount(getFragmentManager(), 3);  //kembali ke menu depan sales order
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "EDIT data failed err:query/DB");
+                            LibInspira.showShortToast(getContext(), "EDIT data failed err:query/DB");
                             LibInspira.hideLoading();
                         }
                     }
@@ -881,7 +881,7 @@ public class FormNewPraOrderItemList extends Fragment implements View.OnClickLis
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "EDIT data failed err:network");
+                LibInspira.showShortToast(getContext(), "EDIT data failed err:network");
                 LibInspira.hideLoading();
             }
         }

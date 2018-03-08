@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         }
         else
         {
-            Log.d("hash", LibInspira.getShared(global.userpreferences,global.user.hash,""));
+            Log.wtf("hash", LibInspira.getShared(global.userpreferences,global.user.hash,""));
             String actionUrl = "Login/checkUser/";
             new checkUser().execute( actionUrl );
         }
@@ -98,42 +98,38 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         try
         {
             LibInspira.setShared(global.userpreferences, global.user.nomor, obj.getString("user_nomor"));
-            LibInspira.setShared(global.userpreferences, global.user.nomor_android, obj.getString("user_nomor_android"));
+//            LibInspira.setShared(global.userpreferences, global.user.nomor_android, obj.getString("user_nomor_android"));
             LibInspira.setShared(global.userpreferences, global.user.nomor_sales, obj.getString("user_nomor_sales"));
             LibInspira.setShared(global.userpreferences, global.user.kode_sales, obj.getString("user_kode_sales"));  //added by Tonny @05-Sep-2017
             LibInspira.setShared(global.userpreferences, global.user.password, obj.getString("user_password"));  //added by Tonny @30-Jul-2017
             LibInspira.setShared(global.userpreferences, global.user.nama, obj.getString("user_nama"));
-            //#WARNING
-            LibInspira.setShared(global.userpreferences, global.user.tipe, obj.getString("user_tipe"));
-            //LibInspira.setShared(global.userpreferences, global.user.tipe, "0");
+//            LibInspira.setShared(global.userpreferences, global.user.tipe, obj.getString("user_tipe"));
+            LibInspira.setShared(global.userpreferences, global.user.tipe, "0");  //testing
 
             LibInspira.setShared(global.userpreferences, global.user.role, obj.getString("user_role"));
             LibInspira.setShared(global.userpreferences, global.user.hash, obj.getString("user_hash"));
+//            LibInspira.setShared(global.userpreferences, global.user.telp, obj.getString("user_telp"));
             LibInspira.setShared(global.userpreferences, global.user.cabang, obj.getString("user_cabang"));
             LibInspira.setShared(global.userpreferences, global.user.namacabang, obj.getString("user_nama_cabang"));
             LibInspira.setShared(global.userpreferences, global.user.kodecabang, obj.getString("user_kode_cabang"));
-            LibInspira.setShared(global.userpreferences, global.user.telp, obj.getString("user_telp"));
 
-            LibInspira.setShared(global.userpreferences, global.user.role_isowner, obj.getString("role_isowner"));
-            LibInspira.setShared(global.userpreferences, global.user.role_issales, obj.getString("role_issales"));
-            LibInspira.setShared(global.userpreferences, global.user.role_setting, obj.getString("role_setting"));
-            LibInspira.setShared(global.userpreferences, global.user.role_settingtarget, obj.getString("role_settingtarget"));
-            LibInspira.setShared(global.userpreferences, global.user.role_salesorder, obj.getString("role_salesorder"));
-            LibInspira.setShared(global.userpreferences, global.user.role_stockmonitoring, obj.getString("role_stockmonitoring"));
-            LibInspira.setShared(global.userpreferences, global.user.role_pricelist, obj.getString("role_pricelist"));
-            LibInspira.setShared(global.userpreferences, global.user.role_addscheduletask, obj.getString("role_addscheduletask"));
-            LibInspira.setShared(global.userpreferences, global.user.role_salestracking, obj.getString("role_salestracking"));
-            LibInspira.setShared(global.userpreferences, global.user.role_hpp, obj.getString("role_hpp"));
-            //#WARNING
-            LibInspira.setShared(global.userpreferences, global.user.role_crossbranch, obj.getString("role_crossbranch"));
-            //LibInspira.setShared(global.userpreferences, global.user.role_crossbranch, "0");
-            LibInspira.setShared(global.userpreferences, global.user.role_creategroup, obj.getString("role_creategroup"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_isowner, obj.getString("role_isowner"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_issales, obj.getString("role_issales"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_setting, obj.getString("role_setting"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_settingtarget, obj.getString("role_settingtarget"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_salesorder, obj.getString("role_salesorder"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_stockmonitoring, obj.getString("role_stockmonitoring"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_pricelist, obj.getString("role_pricelist"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_addscheduletask, obj.getString("role_addscheduletask"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_salestracking, obj.getString("role_salestracking"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_hpp, obj.getString("role_hpp"));
+//            LibInspira.setShared(global.userpreferences, global.user.role_creategroup, obj.getString("role_creategroup"));
 
-            LibInspira.setShared(global.settingpreferences, global.settings.interval, obj.getString("setting_interval"));
-            LibInspira.setShared(global.settingpreferences, global.settings.radius, obj.getString("setting_radius"));
-            LibInspira.setShared(global.settingpreferences, global.settings.tracking, obj.getString("setting_tracking"));
-            LibInspira.setShared(global.settingpreferences, global.settings.jam_awal, obj.getString("setting_jamawal"));
-            LibInspira.setShared(global.settingpreferences, global.settings.jam_akhir, obj.getString("setting_jamakhir"));
+//            LibInspira.setShared(global.settingpreferences, global.settings.interval, obj.getString("setting_interval"));
+//            LibInspira.setShared(global.settingpreferences, global.settings.radius, obj.getString("setting_radius"));
+//            LibInspira.setShared(global.settingpreferences, global.settings.tracking, obj.getString("setting_tracking"));
+//            LibInspira.setShared(global.settingpreferences, global.settings.jam_awal, obj.getString("setting_jamawal"));
+//            LibInspira.setShared(global.settingpreferences, global.settings.jam_akhir, obj.getString("setting_jamakhir"));
         }
         catch(Exception e)
         {
@@ -161,9 +157,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 jsonObject.put("password", password);
                 jsonObject.put("token", LibInspira.getShared(global.installPreferences, global.install.installed_token, ""));
                 Log.d("token_login","token : "+LibInspira.getShared(global.installPreferences, global.install.installed_token, ""));
-
-//                jsonObject.put("username", "AMING");
-//                jsonObject.put("password", "1234");
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -181,24 +174,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     for (int i = 0; i < jsonarray.length(); i++) {
                         JSONObject obj = jsonarray.getJSONObject(i);
                         //Log.d("login","obj"+obj.toString());
-                        if(!obj.has("query")){
+                        if(!obj.has("query") && !obj.has("message")){
                             setdatauser(obj);
-
                             LibInspira.hideLoading();
 
                             if(LibInspira.getShared(global.userpreferences, global.user.tipe, "").equals("0"))
                             {
-
                                 Intent intent = new Intent(Login.this, IndexInternal.class);
                                 startActivity(intent);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+                                overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
                                 finish();
                             }
                             else if(LibInspira.getShared(global.userpreferences, global.user.tipe, "").equals("1"))
                             {
                                 Intent intent = new Intent(Login.this, IndexExternal.class);
                                 startActivity(intent);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+                                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                                 finish();
                             }
                         }
@@ -253,36 +244,30 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 if(jsonarray.length() > 0){
                     for (int i = 0; i < jsonarray.length(); i++) {
                         JSONObject obj = jsonarray.getJSONObject(i);
-                        if(!obj.has("query")){
-                           LibInspira.hideLoading();
-                            String success = obj.getString("success");
-                            if(success.equals("true")){
-                                setdatauser(obj);
-
-                              if(LibInspira.getShared(global.userpreferences, global.user.tipe, "").equals("0"))
-                                {
-                                    Intent intent = new Intent(Login.this, IndexInternal.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-                                    finish();
-                                }
-                                else if(LibInspira.getShared(global.userpreferences, global.user.tipe, "").equals("1"))
-                                {
-                                    Intent intent = new Intent(Login.this, IndexExternal.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-                                    finish();
-                                }
-                            }
-                            else
+                        if(!obj.has("query") && !obj.has("message")){
+                            LibInspira.hideLoading();
+                            setdatauser(obj);
+                            if(LibInspira.getShared(global.userpreferences, global.user.tipe, "").equals("0"))
                             {
-                                GlobalVar.clearDataUser();
-
-                                edtUsername.setVisibility(View.VISIBLE);
-                                edtPassword.setVisibility(View.VISIBLE);
-                                btnSubmit.setVisibility(View.VISIBLE);
-                                Toast.makeText(getBaseContext(), "User has login at another device", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(Login.this, IndexInternal.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+                                finish();
                             }
+                            else if(LibInspira.getShared(global.userpreferences, global.user.tipe, "").equals("1"))
+                            {
+                                Intent intent = new Intent(Login.this, IndexExternal.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+                                finish();
+                            }
+                        }else if(obj.has("message")){
+                            GlobalVar.clearDataUser();
+
+                            edtUsername.setVisibility(View.VISIBLE);
+                            edtPassword.setVisibility(View.VISIBLE);
+                            btnSubmit.setVisibility(View.VISIBLE);
+                            LibInspira.showLongToast(getBaseContext(), obj.getString("message"));
                         }
                         else
                         {
@@ -301,7 +286,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 edtUsername.setVisibility(View.VISIBLE);
                 edtPassword.setVisibility(View.VISIBLE);
                 btnSubmit.setVisibility(View.VISIBLE);
-                Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_LONG).show();
+                LibInspira.showLongToast(getApplicationContext(), "Login Failed");
                 LibInspira.hideLoading();
             }
         }

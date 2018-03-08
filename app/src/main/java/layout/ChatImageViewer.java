@@ -139,7 +139,7 @@ public class ChatImageViewer extends Fragment implements View.OnClickListener{
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                             String path = ChatFragment.saveImage(con,bitmap);
-                            LibInspira.ShowShortToast(con,"Saved");
+                            LibInspira.showShortToast(con,"Saved");
 
 //                            ChatMsgContainer temp = new ChatMsgContainer();
 //                            temp.copy(data.get(position));
@@ -152,7 +152,7 @@ public class ChatImageViewer extends Fragment implements View.OnClickListener{
                         public void onBitmapFailed(Drawable errorDrawable) {
                             //set gone semua - asumsi file gambar di hapus
                             //setAllView(viewFinal,View.GONE);
-                            LibInspira.ShowShortToast(con,"Download err");
+                            LibInspira.showShortToast(con,"Download err");
                         }
 
                         @Override

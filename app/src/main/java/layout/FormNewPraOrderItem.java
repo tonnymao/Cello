@@ -151,12 +151,12 @@ public class FormNewPraOrderItem extends Fragment implements View.OnClickListene
             LibInspira.setShared(global.temppreferences, global.temp.praorder_jumlah_add, etJumlah.getText().toString());
 
             if(LibInspira.getShared(global.temppreferences, global.temp.praorder_kode_barang_add, "").equals("")){
-                LibInspira.ShowShortToast(getContext(), "There is no item to add.");
+                LibInspira.showShortToast(getContext(), "There is no item to add.");
                 return;
             }
             else if(LibInspira.getShared(global.temppreferences, global.temp.praorder_jumlah_add, "0").equals("0"))
             {
-                LibInspira.ShowShortToast(getContext(), "Jumlah tidak boleh 0");
+                LibInspira.showShortToast(getContext(), "Jumlah tidak boleh 0");
                 return;
             }
             else if(LibInspira.getShared(global.temppreferences, global.temp.praorder_menu, "").equals("add_new"))
@@ -320,7 +320,7 @@ public class FormNewPraOrderItem extends Fragment implements View.OnClickListene
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowShortToast(con, "Pra Order Item has been successfully EDITED");
+                            LibInspira.showShortToast(con, "Pra Order Item has been successfully EDITED");
 
                             editStrItem();
 
@@ -330,7 +330,7 @@ public class FormNewPraOrderItem extends Fragment implements View.OnClickListene
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(con, "EDIT Pra Order Item failed err:query/DB");
+                            LibInspira.showShortToast(con, "EDIT Pra Order Item failed err:query/DB");
                             LibInspira.hideLoading();
                         }
                     }
@@ -339,7 +339,7 @@ public class FormNewPraOrderItem extends Fragment implements View.OnClickListene
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(con, "EDIT Pra Order Item failed err:network");
+                LibInspira.showShortToast(con, "EDIT Pra Order Item failed err:network");
                 LibInspira.hideLoading();
             }
         }
@@ -391,7 +391,7 @@ public class FormNewPraOrderItem extends Fragment implements View.OnClickListene
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowLongToast(getContext(), "Data has been successfully added");
+                            LibInspira.showLongToast(getContext(), "Data has been successfully added");
 
                             LibInspira.setShared(global.temppreferences, global.temp.praorder_item_edit_new, "");
 
@@ -414,7 +414,7 @@ public class FormNewPraOrderItem extends Fragment implements View.OnClickListene
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "Adding new data failed err:query");
+                            LibInspira.showShortToast(getContext(), "Adding new data failed err:query");
                             LibInspira.hideLoading();
                         }
                     }
@@ -423,7 +423,7 @@ public class FormNewPraOrderItem extends Fragment implements View.OnClickListene
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "Adding new data failed err:network");
+                LibInspira.showShortToast(getContext(), "Adding new data failed err:network");
                 LibInspira.hideLoading();
             }
         }

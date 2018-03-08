@@ -185,7 +185,7 @@ public class FormSalesOrderHeaderFragment extends Fragment implements View.OnCli
                     LibInspira.getShared(global.temppreferences, global.temp.salesorder_valuta_nomor, "").equals("")
                     )
             {
-                LibInspira.ShowShortToast(getContext(), "All Field Required");
+                LibInspira.showShortToast(getContext(), "All Field Required");
             }
             else
             {

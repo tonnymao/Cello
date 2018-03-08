@@ -256,7 +256,7 @@ public class PraOrderApprovalFragment extends Fragment implements View.OnClickLi
                         {
                             LibInspira.hideLoading();
                             if(flagApproval == 1) {
-                                LibInspira.ShowShortToast(getContext(), "Data Change into APPROVE");
+                                LibInspira.showShortToast(getContext(), "Data Change into APPROVE");
                                 LibInspira.setShared(global.temppreferences, global.temp.praorder_selected_list_status, "1");
                                 LibInspira.BackFragment(getFragmentManager());
 //                                btnApprove.setVisibility(View.VISIBLE);
@@ -266,7 +266,7 @@ public class PraOrderApprovalFragment extends Fragment implements View.OnClickLi
                             }
                             else
                             {
-                                LibInspira.ShowShortToast(getContext(), "Data Change into DISAPPROVE");
+                                LibInspira.showShortToast(getContext(), "Data Change into DISAPPROVE");
                                 LibInspira.setShared(global.temppreferences, global.temp.praorder_selected_list_status, "0");
                                 LibInspira.BackFragment(getFragmentManager());
 //                                btnApprove.setVisibility(View.GONE);

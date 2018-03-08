@@ -112,7 +112,7 @@ public class SalesTargetFragment extends Fragment implements View.OnClickListene
             tvSales.getText().toString().equals(""))
             {
                 //jika data kosong, tampilkan pesan error
-                LibInspira.ShowShortToast(getContext(), "Please fill in all data");
+                LibInspira.showShortToast(getContext(), "Please fill in all data");
             }else{
                 Boolean same = false;
                 ItemAdapter itemAdapter = new ItemAdapter();
@@ -148,12 +148,12 @@ public class SalesTargetFragment extends Fragment implements View.OnClickListene
         }else if (id == R.id.btnSet){
             if(lvGridSales.getCount() > 0) {
                 //jika listview terdapat item, maka simpan data
-                LibInspira.ShowShortToast(getContext(), "Adding new sales target...");
+                LibInspira.showShortToast(getContext(), "Adding new sales target...");
                 String actionUrl = "Sales/setTarget";
                 new setTarget().execute(actionUrl);
             }else{
                 //jika listview kosong, tampilkan pesan error
-                LibInspira.ShowShortToast(getContext(), "There is no data to save");
+                LibInspira.showShortToast(getContext(), "There is no data to save");
             }
         }
     }
@@ -200,7 +200,7 @@ public class SalesTargetFragment extends Fragment implements View.OnClickListene
                         JSONObject obj = jsonarray.getJSONObject(i);
                         String success = obj.getString("success");
                         if(success.equals("true")){
-                            LibInspira.ShowShortToast(getContext(), "Target has been successfully saved");
+                            LibInspira.showShortToast(getContext(), "Target has been successfully saved");
                             LibInspira.hideLoading();
                             itemListAdapter.clear();
                             LibInspira.setShared(global.sharedpreferences, global.shared.nomorsales, "");
@@ -210,7 +210,7 @@ public class SalesTargetFragment extends Fragment implements View.OnClickListene
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "Saving data failed");
+                            LibInspira.showShortToast(getContext(), "Saving data failed");
                             LibInspira.hideLoading();
                         }
                     }

@@ -466,7 +466,7 @@ public class FilterStockFragment extends Fragment implements View.OnClickListene
                     for (int i = 0; i < jsonarray.length(); i++) {
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(obj.has("query")){
-                            LibInspira.ShowShortToast(getContext(), "Failed get data");
+                            LibInspira.showShortToast(getContext(), "Failed get data");
                             error = true;
                         }
                     }

@@ -111,7 +111,7 @@ public class FormGroupFragment extends Fragment implements View.OnClickListener 
         switch (id) {
             case R.id.btnSave:
                 if (etName.getText().toString().equals(""))
-                    LibInspira.ShowLongToast(getContext(), "Please fill in Group Name");
+                    LibInspira.showLongToast(getContext(), "Please fill in Group Name");
                 else {
                     new group().execute(actionUrl);
                 }
@@ -174,7 +174,7 @@ public class FormGroupFragment extends Fragment implements View.OnClickListener 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.d("resultQuery", result);
-            LibInspira.ShowLongToast(getContext(), notif);
+            LibInspira.showLongToast(getContext(), notif);
             LibInspira.BackFragment(getActivity().getSupportFragmentManager());
         }
     }

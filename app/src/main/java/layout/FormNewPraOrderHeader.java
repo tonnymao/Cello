@@ -295,7 +295,7 @@ public class FormNewPraOrderHeader extends Fragment implements View.OnClickListe
 
                     }catch (Exception e){
                         e.printStackTrace();
-                        LibInspira.ShowShortToast(getContext(), "The current data is invalid. Please add new data.");
+                        LibInspira.showShortToast(getContext(), "The current data is invalid. Please add new data.");
                         setAdapterJenisHarga(LibInspira.getShared(
                                 global.datapreferences,
                                 global.data.jenis_harga, ""));
@@ -360,7 +360,7 @@ public class FormNewPraOrderHeader extends Fragment implements View.OnClickListe
                     LibInspira.getShared(global.temppreferences, global.temp.praorder_jenis_harga_nomor, "").equals("")
                     )
             {
-                LibInspira.ShowShortToast(getContext(), "All Field Required");
+                LibInspira.showShortToast(getContext(), "All Field Required");
             }
             else
             {
@@ -489,14 +489,14 @@ public class FormNewPraOrderHeader extends Fragment implements View.OnClickListe
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowLongToast(getContext(), "Data has been successfully EDITED");
+                            LibInspira.showLongToast(getContext(), "Data has been successfully EDITED");
                             //setupStart();
                             //LibInspira.clearShared(global.temppreferences); //hapus cache jika data berhasil ditambahkan
                             LibInspira.BackFragmentCount(getFragmentManager(), 2);  //kembali ke menu depan sales order
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "EDIT data failed err:query/DB");
+                            LibInspira.showShortToast(getContext(), "EDIT data failed err:query/DB");
                             LibInspira.hideLoading();
                         }
                     }
@@ -505,7 +505,7 @@ public class FormNewPraOrderHeader extends Fragment implements View.OnClickListe
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "EDIT data failed err:network");
+                LibInspira.showShortToast(getContext(), "EDIT data failed err:network");
                 LibInspira.hideLoading();
             }
         }

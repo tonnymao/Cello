@@ -3,9 +3,11 @@ package com.inspira.cello;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -61,10 +63,6 @@ public class IndexInternal extends AppCompatActivity
         setContentView(R.layout.activity_index_internal);
 
         startService(new Intent(getApplicationContext(), GMSbackgroundTask.class));
-
-
-
-
 
         chatFrag = new ChatFragment();
         chatFrag.setup(this.getApplicationContext());

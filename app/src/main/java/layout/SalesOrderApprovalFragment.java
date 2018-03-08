@@ -215,7 +215,7 @@ public class SalesOrderApprovalFragment extends Fragment implements View.OnClick
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("error")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowShortToast(getContext(), "Data has been successfully approved");
+                            LibInspira.showShortToast(getContext(), "Data has been successfully approved");
                         }else{
                             LibInspira.hideLoading();
                             LibInspira.alertbox("Approving data", obj.getString("error"), getActivity(), new Runnable(){

@@ -170,7 +170,7 @@ public class FormSalesOrderDetailJasaFragment extends FormSalesOrderDetailItemFr
                 LibInspira.setShared(global.temppreferences, global.temp.salesorder_pekerjaan_notes, "_");
             }
             if(LibInspira.getShared(global.temppreferences, global.temp.salesorder_pekerjaan_nomor, "").equals("")){
-                LibInspira.ShowShortToast(getContext(), "There is no pekerjaan to add.");
+                LibInspira.showShortToast(getContext(), "There is no pekerjaan to add.");
                 return;
             }
             if(LibInspira.getShared(global.temppreferences, global.temp.salesorder_pekerjaan_index, "").equals(""))

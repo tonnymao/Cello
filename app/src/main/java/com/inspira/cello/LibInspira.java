@@ -1,22 +1,28 @@
 /******************************************************************************
-    Author           : Tonny
-    Description      : Library Inspira
-    History          :
-        o> 08-Jul-2017 (Tonny)
-           * Create New
-******************************************************************************/
+ Author           : Tonny
+ Description      : Library Inspira
+ History          :
+ o> 08-Jul-2017 (Tonny)
+ * Create New
+ ******************************************************************************/
 package com.inspira.cello;
 
 //import android.app.Fragment;  // is the Fragment class in the native version of the Android SDK. It was introduced in Android 3 (API 11)
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -25,7 +31,10 @@ import android.support.v4.app.Fragment; // is the Fragment class for compatibili
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
+import android.support.v7.app.NotificationCompat;
+import android.text.Html;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -51,6 +60,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -64,8 +74,9 @@ import layout.ScalingUtilities;
 public class LibInspira {
     private static ProgressDialog loadingDialog;
     private static String hostUrl;
-    private static String inspiraDateTimeFormat = "yyyy-MM-dd hh:mm:ss";  //added by Tonny @26-Aug-2017 format standar datetime pada database inspira
-    private static String inspiraDateFormat = "yyyy-MM-dd";  //added by Tonny @26-Aug-2017 format standar datetime pada database inspira
+    public static String inspiraDateTimeFormat = "yyyy-MM-dd hh:mm:ss";  //added by Tonny @26-Aug-2017 format standar datetime pada database inspira
+    public static String inspiraDateFormat = "yyyy-MM-dd";  //added by Tonny @26-Aug-2017 format standar datetime pada database inspira
+    private static String dialogValue;
 
 
     public static void GoToActivity(String _activityName){
@@ -74,15 +85,27 @@ public class LibInspira {
     public static void GoToActivity(Integer _activityIndex){
 
     }
+
     public static void ReplaceFragment(FragmentManager _fragmentManager, Integer _fragmentContainerID, Fragment _fragment){
         FragmentTransaction fragmentTransaction = _fragmentManager.beginTransaction();
+        //fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.replace(_fragmentContainerID, _fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
+    //added by Tonny @01-Nov-2017
+    public static void ReplaceFragmentNoBackStack(FragmentManager _fragmentManager, Integer _fragmentContainerID, Fragment _fragment){
+        FragmentTransaction fragmentTransaction = _fragmentManager.beginTransaction();
+        fragmentTransaction.replace(_fragmentContainerID, _fragment);
+        fragmentTransaction.commit();
+    }
+
     public static void AddFragment(FragmentManager _fragmentManager, Integer _fragmentContainerID, Fragment _fragment){
         FragmentTransaction fragmentTransaction = _fragmentManager.beginTransaction();
+        //fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.add(_fragmentContainerID, _fragment);
         //fragmentTransaction.addToBackStack(null);  //remarked by Tonny @08-Jul-2017, masih belum tau apakah diperlukan
         fragmentTransaction.commit();
@@ -106,7 +129,7 @@ public class LibInspira {
     }
 
     //added by Tonny @15-Jul-2017
-    public static void ShowShortToast(Context _context, String _message){
+    public static void showShortToast(Context _context, String _message){
         Context context = _context;
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, _message, duration);
@@ -114,7 +137,7 @@ public class LibInspira {
     }
 
     //added by Tonny @15-Jul-2017
-    public static void ShowLongToast(Context _context, String _message){
+    public static void showLongToast(Context _context, String _message){
         Context context = _context;
         int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText(context, _message, duration);
@@ -172,39 +195,58 @@ public class LibInspira {
 
     //function digunakan pada addtextchangedlistener untuk melakukan format angka ketika menulis
     //added by ADI @26-Aug-2017
-    public static void formatNumberEditText(EditText tv, TextWatcher tw, Boolean allowZero, Boolean withCommas)
+    public static void formatNumberEditText(EditText _tv, TextWatcher _tw, Boolean _allowZero, Boolean _withCommas)
     {
-        String value = tv.getText().toString();
+        String value = _tv.getText().toString();
         try
         {
-            tv.removeTextChangedListener(tw);
+            _tv.removeTextChangedListener(_tw);
 
             if (value != null && !value.equals(""))
             {
 
                 if(value.startsWith(",")){
-                    tv.setText("0,");
+                    _tv.setText("0,");
                 }
-                if(!allowZero)
+                if(!_allowZero)
                 {
                     if(value.startsWith("0") && !value.startsWith("0,")){
-                        tv.setText("");
+                        _tv.setText("");
                     }
                 }
 
 
-                String str = tv.getText().toString();
+                String str = _tv.getText().toString();
                 if (!value.equals(""))
-                    tv.setText(delimeter(str.replace(",", ""), withCommas));
-                tv.setSelection(tv.getText().toString().length());
+                    _tv.setText(delimeter(str.replace(",", ""), _withCommas));
+                _tv.setSelection(_tv.getText().toString().length());
             }
-            tv.addTextChangedListener(tw);
+            _tv.addTextChangedListener(_tw);
         }
         catch (Exception ex)
         {
             ex.printStackTrace();
-            tv.addTextChangedListener(tw);
+            _tv.addTextChangedListener(_tw);
         }
+    }
+
+    public static void createNotification(Application _activity, int _icon, Context  _context, String _title, String _content)
+    {
+        //contoh pengisian, _icon = R.drawable.babies_logo;
+        final Intent emptyIntent = new Intent();
+        PendingIntent pendingIntent = PendingIntent.getActivity(_context, 0, emptyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        android.support.v4.app.NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(_activity)
+                        .setSmallIcon(_icon)
+                        .setContentTitle(_title)
+                        .setContentText(_content)
+                        .setContentIntent(pendingIntent);
+        mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+
+        NotificationManager notificationManager = (NotificationManager) _context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, mBuilder.build());
+
     }
 
     //added by ADI @26-Jul-2017
@@ -334,7 +376,7 @@ public class LibInspira {
 
     //added by ADI @26-Jul-2017
     // Execute POST JSON and Retrieve Data JSON
-    public static String  executePost(Context _context, String _targetURL, JSONObject _jsonObject, int _timeoutMiliSecond){
+    public static String executePost(Context _context, String _targetURL, JSONObject _jsonObject, int _timeoutMiliSecond){
         GlobalVar global = new GlobalVar(_context);
         String url = getShared(global.sharedpreferences, "server", "");
         hostUrl = "https://" + url + GlobalVar.webserviceURL;
@@ -574,8 +616,8 @@ public class LibInspira {
         if (_commandCancel != null){
             alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                        _commandCancel.run();
-            } });}
+                    _commandCancel.run();
+                } });}
         alertDialog.show();
     }
 
@@ -678,4 +720,124 @@ public class LibInspira {
         return strDate;
     }
 
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private static double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
+    //added by Tonny @28-Nov-2017  untuk cek jika jarak melebihi radius
+    public static boolean isDistanceOverRadius(double oldLatitude, double oldLongitude, double newLatitude, double newLongitude, double radiusInMetre) {
+        double theta = oldLongitude - newLongitude;
+        double dist = Math.sin(deg2rad(oldLatitude))
+                * Math.sin(deg2rad(newLatitude))
+                + Math.cos(deg2rad(oldLatitude))
+                * Math.cos(deg2rad(newLatitude))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515; // distance in Kilometers
+        dist = dist * 1000; // distance in meters
+        Log.i("Distance value: ", String.valueOf(dist));
+//        LibInspira.ShowLongToast(getApplicationContext(), "old location: " + oldLatitude + " - " + oldLongitude);
+//        LibInspira.ShowLongToast(getApplicationContext(), "new location: " + newLatitude + " - " + newLongitude);
+//        LibInspira.ShowLongToast(getApplicationContext(), "location distance: " + dist);
+//        LibInspira.ShowLongToast(getApplicationContext(), "location radius: " + radiusInMetre);
+
+        return dist > radiusInMetre;
+    }
+
+    public static String getDialogValue(boolean _isNumeric) {
+        if(_isNumeric && dialogValue.equals("")){
+            dialogValue = "0";
+        }
+        return dialogValue;
+    }
+
+    public static void setDialogValue(String _dialogValue) {
+        dialogValue = _dialogValue;
+    }
+    //added by Tonny @09-Oct-2017
+    //untuk menampilkan dialog untuk input numeric
+    public static void showNumericInputDialog(String _title, String _message, final Activity _activity, final Context _context, final Runnable _commandOK, final Runnable _commandCancel) {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(_activity);
+        final EditText editText = new EditText(_context);
+        editText.setKeyListener(DigitsKeyListener.getInstance());
+        alertDialog.setTitle(_title);
+        alertDialog.setMessage(_message);
+        alertDialog.setView(editText);
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (_commandOK != null)
+                    setDialogValue(editText.getText().toString());
+                _commandOK.run();
+            } });
+        if (_commandCancel != null){
+            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    _commandCancel.run();
+                } });}
+        alertDialog.show();
+    }
+
+    //added by Tonny @27-Dec-2017
+    public static void showInputDialog(String _title, String _message, final Activity _activity, final Context _context, final Runnable _commandOK, final Runnable _commandCancel) {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(_activity);
+        final EditText editText = new EditText(_context);
+        alertDialog.setTitle(_title);
+        alertDialog.setMessage(_message);
+        alertDialog.setView(editText);
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (_commandOK != null)
+                    setDialogValue(editText.getText().toString());
+                _commandOK.run();
+            } });
+        if (_commandCancel != null){
+            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    _commandCancel.run();
+                } });}
+        alertDialog.show();
+    }
+
+    //added by Tonny @14-Dec-2017  // untuk pengecekan data (input) kembar dalam sebuah datapreferences
+    public static boolean isAlreadyOnList(String _data, String _newdata, String _splitter){
+        boolean result = false;
+        List<String> dataList = new ArrayList<String>(Arrays.asList(_data.split(_splitter)));
+        for (String value :
+                dataList) {
+            if (value.equals(_newdata)) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public static String readTextFile(Context _context, String _fileName){
+        String text = "";
+        List<String> mLines = new ArrayList<>();
+        InputStream inputStream = null;
+        try {
+            inputStream = _context.getAssets().open(_fileName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null) //mLines.add(line);
+                text = text + line + "\n";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return text;
+    }
+
+    public static String boldText(String _text){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            _text = Html.fromHtml("<b>"+ _text +"</b>", Html.FROM_HTML_MODE_LEGACY).toString();
+        } else {
+            _text = Html.fromHtml("<b>"+ _text +"</b>").toString();
+        }
+        return _text;
+    }
 }

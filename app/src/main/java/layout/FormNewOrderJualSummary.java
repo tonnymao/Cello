@@ -374,13 +374,13 @@ public class FormNewOrderJualSummary extends Fragment implements View.OnClickLis
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowShortToast(getContext(), "Data has been successfully added");
+                            LibInspira.showShortToast(getContext(), "Data has been successfully added");
                             LibInspira.clearShared(global.temppreferences); //hapus cache jika data berhasil ditambahkan
                             LibInspira.BackFragmentCount(getFragmentManager(), 4);  //kembali ke menu depan sales order
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "Adding new data failed err:db");
+                            LibInspira.showShortToast(getContext(), "Adding new data failed err:db");
                             LibInspira.hideLoading();
                         }
                     }
@@ -389,7 +389,7 @@ public class FormNewOrderJualSummary extends Fragment implements View.OnClickLis
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "Adding new data failed err:network");
+                LibInspira.showShortToast(getContext(), "Adding new data failed err:network");
                 LibInspira.hideLoading();
             }
         }
@@ -455,14 +455,14 @@ public class FormNewOrderJualSummary extends Fragment implements View.OnClickLis
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowLongToast(getContext(), "Data has been successfully EDITED");
+                            LibInspira.showLongToast(getContext(), "Data has been successfully EDITED");
                             //setupStart();
                             //LibInspira.clearShared(global.temppreferences); //hapus cache jika data berhasil ditambahkan
                             LibInspira.BackFragmentCount(getFragmentManager(), 4);  //kembali ke menu depan sales order
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "EDIT data failed err:query/DB");
+                            LibInspira.showShortToast(getContext(), "EDIT data failed err:query/DB");
                             LibInspira.hideLoading();
                         }
                     }
@@ -471,7 +471,7 @@ public class FormNewOrderJualSummary extends Fragment implements View.OnClickLis
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "EDIT data failed err:network");
+                LibInspira.showShortToast(getContext(), "EDIT data failed err:network");
                 LibInspira.hideLoading();
             }
         }
@@ -543,14 +543,14 @@ public class FormNewOrderJualSummary extends Fragment implements View.OnClickLis
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowLongToast(getContext(), "Data has been successfully EDITED");
+                            LibInspira.showLongToast(getContext(), "Data has been successfully EDITED");
                             //setupStart();
                             //LibInspira.clearShared(global.temppreferences); //hapus cache jika data berhasil ditambahkan
                             LibInspira.BackFragmentCount(getFragmentManager(), 4);  //kembali ke menu depan sales order
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "EDIT data failed err:query/DB");
+                            LibInspira.showShortToast(getContext(), "EDIT data failed err:query/DB");
                             LibInspira.hideLoading();
                         }
                     }
@@ -559,7 +559,7 @@ public class FormNewOrderJualSummary extends Fragment implements View.OnClickLis
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "EDIT data failed err:network");
+                LibInspira.showShortToast(getContext(), "EDIT data failed err:network");
                 LibInspira.hideLoading();
             }
         }

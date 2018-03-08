@@ -108,7 +108,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, V
         }else if(id == R.id.btnUpdate) {
             String actionUrl = "Settings/setSettings/";
             new updateSettings().execute(actionUrl);
-            LibInspira.ShowShortToast(getContext(), "Saving...");
+            LibInspira.showShortToast(getContext(), "Saving...");
         }
 //        }else if(id == R.id.edtInterval){
 //            edtInterval.setText(edtInterval.getText().toString().replace(",",""));
@@ -178,7 +178,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, V
 
                             }else{
                                 Log.d("status", "FAILED");
-                                LibInspira.ShowShortToast(getContext(), "Not success");
+                                LibInspira.showShortToast(getContext(), "Not success");
                             }
                         }else{
                             LibInspira.setShared(global.settingpreferences, global.settings.interval, "0");
@@ -186,7 +186,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, V
                             LibInspira.setShared(global.settingpreferences, global.settings.tracking, "GPS Only");
                             LibInspira.setShared(global.settingpreferences, global.settings.jam_awal, "00:00");
                             LibInspira.setShared(global.settingpreferences, global.settings.jam_akhir, "00:00");
-                            LibInspira.ShowShortToast(getContext(), "Update Settings Failed");
+                            LibInspira.showShortToast(getContext(), "Update Settings Failed");
                         }
                     }
                 }
@@ -232,18 +232,18 @@ public class SettingFragment extends Fragment implements View.OnClickListener, V
 
                     String success = obj.getString("success");
                     if(success.equals("true")){
-                        LibInspira.ShowShortToast(getContext(), "Setting Updated");
+                        LibInspira.showShortToast(getContext(), "Setting Updated");
                         LibInspira.ReplaceFragment(getFragmentManager(), R.id.fragment_container, new DashboardInternalFragment());
                     }else{
                         Log.d("FAILED: ", success);
-                        LibInspira.ShowShortToast(getContext(), "Update Settings Failed");
+                        LibInspira.showShortToast(getContext(), "Update Settings Failed");
                     }
                 }
                 LibInspira.hideLoading();
             }catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "Update Settings Failed");
+                LibInspira.showShortToast(getContext(), "Update Settings Failed");
                 LibInspira.hideLoading();
             }
         }

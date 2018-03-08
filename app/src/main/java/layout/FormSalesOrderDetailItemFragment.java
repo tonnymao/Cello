@@ -260,7 +260,7 @@ public class FormSalesOrderDetailItemFragment extends Fragment implements View.O
                 LibInspira.setShared(global.temppreferences, global.temp.salesorder_item_notes, "_");
             }
             if(LibInspira.getShared(global.temppreferences, global.temp.salesorder_item_nomor, "").equals("")){
-                LibInspira.ShowShortToast(getContext(), "There is no item to add.");
+                LibInspira.showShortToast(getContext(), "There is no item to add.");
                 return;
             }
             else if(LibInspira.getShared(global.temppreferences, global.temp.salesorder_item_index, "").equals(""))

@@ -264,7 +264,7 @@ public class SummaryPraOrderItemListFragment extends Fragment implements View.On
                         itemadapter.notifyDataSetChanged();
                     }catch (Exception e){
                         e.printStackTrace();
-                        LibInspira.ShowShortToast(getContext(), "The current data is invalid. Please add new data.");
+                        LibInspira.showShortToast(getContext(), "The current data is invalid. Please add new data.");
                         strData = "";
                         refreshList();
                     }

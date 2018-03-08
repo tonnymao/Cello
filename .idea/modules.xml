@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://D:\Projects\Inspira\Cello\BABIES_New.iml" filepath="D:\Projects\Inspira\Cello\BABIES_New.iml" />
       <module fileurl="file://$PROJECT_DIR$/Cello.iml" filepath="$PROJECT_DIR$/Cello.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

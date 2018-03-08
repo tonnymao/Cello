@@ -177,7 +177,7 @@ public class FormScheduleTaskFragment extends Fragment implements View.OnClickLi
 
             if(date.equals("[Date]") || time.equals("[Time]") || reminder.equals("") || description.equals(""))
             {
-                LibInspira.ShowShortToast(getContext(), "Please fill in all fields");
+                LibInspira.showShortToast(getContext(), "Please fill in all fields");
             } else {
                 LibInspira.clearShared(global.schedulepreferences);
                 LibInspira.setShared(global.schedulepreferences, global.schedule.datesch, date);

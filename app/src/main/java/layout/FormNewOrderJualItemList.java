@@ -189,7 +189,7 @@ public class FormNewOrderJualItemList extends Fragment implements View.OnClickLi
                 }
                 else
                 {
-                    LibInspira.ShowLongToast(getActivity(),"Data Item Masih Kosong");
+                    LibInspira.showLongToast(getActivity(),"Data Item Masih Kosong");
                 }
 
 //                LibInspira.alertBoxYesNo("Menambah baru", "Apakah anda yakin ingin Menambah data baru?", getActivity(), new Runnable() {
@@ -333,7 +333,7 @@ public class FormNewOrderJualItemList extends Fragment implements View.OnClickLi
                             }
                         }catch (Exception e){
                             e.printStackTrace();
-                            LibInspira.ShowShortToast(getContext(), "The current data is invalid. Please add new data.");
+                            LibInspira.showShortToast(getContext(), "The current data is invalid. Please add new data.");
                             LibInspira.setShared(global.temppreferences, global.temp.orderjual_item_add, "");
                             strData = "";
                             refreshList();
@@ -787,7 +787,7 @@ public class FormNewOrderJualItemList extends Fragment implements View.OnClickLi
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(),"err : DB loading data");
+                            LibInspira.showShortToast(getContext(),"err : DB loading data");
                         }
                     }
                     //set current praorder nomor
@@ -809,7 +809,7 @@ public class FormNewOrderJualItemList extends Fragment implements View.OnClickLi
                 }
                 else
                 {
-                    LibInspira.ShowShortToast(getContext(),"err : loading data");
+                    LibInspira.showShortToast(getContext(),"err : loading data");
                 }
                 LibInspira.hideLoading();
                 refreshList();
@@ -871,7 +871,7 @@ public class FormNewOrderJualItemList extends Fragment implements View.OnClickLi
                         JSONObject obj = jsonarray.getJSONObject(i);
                         if(!obj.has("query")){
                             LibInspira.hideLoading();
-                            LibInspira.ShowLongToast(getContext(), "Data has been successfully DELETED");
+                            LibInspira.showLongToast(getContext(), "Data has been successfully DELETED");
                             deleteSelectedItem(Integer.parseInt(LibInspira.getShared(global.temppreferences, global.temp.orderjual_delete_item_index,"")));
 
                             //reset
@@ -881,7 +881,7 @@ public class FormNewOrderJualItemList extends Fragment implements View.OnClickLi
                         }
                         else
                         {
-                            LibInspira.ShowShortToast(getContext(), "DELETE data failed err:query/DB");
+                            LibInspira.showShortToast(getContext(), "DELETE data failed err:query/DB");
                             LibInspira.hideLoading();
                         }
                     }
@@ -890,7 +890,7 @@ public class FormNewOrderJualItemList extends Fragment implements View.OnClickLi
             catch(Exception e)
             {
                 e.printStackTrace();
-                LibInspira.ShowShortToast(getContext(), "DELETE data failed err:network");
+                LibInspira.showShortToast(getContext(), "DELETE data failed err:network");
                 LibInspira.hideLoading();
             }
         }

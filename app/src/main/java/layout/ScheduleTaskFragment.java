@@ -196,7 +196,7 @@ public class ScheduleTaskFragment extends Fragment implements View.OnClickListen
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            LibInspira.ShowLongToast(getContext(), "Schedule Canceled");
+            LibInspira.showLongToast(getContext(), "Schedule Canceled");
         }
     }
 
